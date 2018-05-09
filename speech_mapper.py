@@ -1,11 +1,11 @@
 import tweepy
 import csv
 
-consumer_key = 'tDnNcHt4xSPI6oEkCyLe2AMgF'
-consumer_secret = 'A3tDeC80iIlZVewNWvY2d0rNxdSMpGvqDI1fiHZixGzHcSiHdq'
+consumer_key = 'YOUR PRIVATE CONSUMER KEY'
+consumer_secret = 'YOUR PRIVATE CONSUMER SECRET'
 
-access_token = '346254841-yeTkUEVy84okfDL9v0pVrQjlDyckaYOgvz6JN11G'
-access_token_secret = 'ObqW5Ra77HA3x2npYC4Kxlgjv5jnbdTIClLhWrtBOIfMP'
+access_token = 'YOUR PRIVATE ACCESS TOKES'
+access_token_secret = 'YOUR ACCESS TOKEN SECRET'
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token,access_token_secret)
@@ -31,10 +31,14 @@ subjects = {'Deus': ['deus'],
 for value in candidates.keys():
 	print(value)
 	tweets_list = []
-
+	
+	"""
+	function used to test the software, using the tool above it takes too long
+	
 	candidate_tweets = api.user_timeline(id = candidates[value][0], count = 200, include_rts = True)
-	#for status in candidate_tweets:
-	#	tweets_list.append(status.text.lower())
+	for status in candidate_tweets:
+		tweets_list.append(status.text.lower())
+	"""
 	for status in tweepy.Cursor(api.user_timeline, id = candidates[value][0], count = 200, include_rts = True, ).items():
 		tweets_list.append(status._json['text'].lower())
 	ind_ex = 0
@@ -57,7 +61,7 @@ header = ['', 'Quantidade de tweets lidos']
 for value in subjects.keys():
     header.append(value)
 
-#put the results in a .csv file
+#put the results into a .csv file
 with open('results.csv', 'w', newline='') as csvfile:
     spamwriter = csv.writer(csvfile, delimiter=',',
                             quotechar='|', quoting=csv.QUOTE_MINIMAL)
